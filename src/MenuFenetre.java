@@ -24,6 +24,7 @@ Historique des modifications
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -84,12 +85,20 @@ public class MenuFenetre extends JMenuBar{
 	private JRadioButtonMenuItem sortByHauteurDecroissante;
 	private JRadioButtonMenuItem sortByOrdreServeur;
 	private static ButtonGroup groupJRadioButtonMenuItem = new ButtonGroup();
+
 	
 	CommBase comm; // Pour activer/dÃ©sactiver la communication avec le serveur
+	ListeChainee liste;
+	UtilitaireTrie ut;
+	FenetreFormes fenetre;
+	
 	/**
 	 * Constructeur
 	 */
-	public MenuFenetre(CommBase comm) {
+	public MenuFenetre(CommBase comm, ListeChainee liste, FenetreFormes fenetre) {
+		this.fenetre = fenetre;
+		ut = new UtilitaireTrie();
+		this.liste = liste;
 		this.comm = comm;
 		addMenuDessiner();
 		addMenuFichier();
@@ -177,41 +186,48 @@ public class MenuFenetre extends JMenuBar{
 		
 		JMenu menu = creerMenu (MENU_TRIER_TITRE, new JRadioButtonMenuItem[] { sortBySequenceCroissante, sortBySequenceDecroissante, sortByAireFormeCroissante,sortByAireFormeDecroissante,sortByTypeFormes,sortByTypeFormesInverse, sortByDistanceMaximale,sortByLargeurCroissante, sortByLargeurDecroissante,  sortByHauteurCroissante, sortByHauteurDecroissante, sortByOrdreServeur });
 		menu.getItem(0).addActionListener(new ActionListener() {
+			//séquence croissante
 			public void actionPerformed(ActionEvent arg0) {
-			System.out.println("Test 1er objet");
-			
+				ut.trieGeneral(liste, true, 1);
+				fenetre.repaint();
 			}
 		});
 		menu.getItem(1).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			System.out.println("Test 2e objet");
-			groupJRadioButtonMenuItem.clearSelection();
+				ut.trieGeneral(liste, false, 1);
+				fenetre.repaint();
+				groupJRadioButtonMenuItem.clearSelection();
 			}
 		});
     	menu.getItem(2).addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent arg0) {
-			System.out.println("Test 3e objet");
+		    	ut.trieGeneral(liste, true, 2);
+		    	fenetre.repaint();
 			groupJRadioButtonMenuItem.clearSelection();
 			}
 		});
 		menu.getItem(3).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			System.out.println("Test 4e objet");
+				ut.trieGeneral(liste, false, 2);
+				fenetre.repaint();
 			}
 		});
 		menu.getItem(4).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			System.out.println("Test 5e objet");
+				ut.trieGeneral(liste, true, 4);
+				fenetre.repaint();
 			}
 		});
 		menu.getItem(5).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			System.out.println("Test 6e objet");
+				ut.trieGeneral(liste, false, 4);
+				fenetre.repaint();
 			}
 		});
 		menu.getItem(6).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			System.out.println("Test 7e objet");
+				ut.trieGeneral(liste, true, 3);
+				fenetre.repaint();
 			}
 		});
 		menu.getItem(7).addActionListener(new ActionListener() {

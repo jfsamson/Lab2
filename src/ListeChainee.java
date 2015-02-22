@@ -98,9 +98,6 @@ public class ListeChainee {
 	 * déterminer sa position dans la liste et l'ajouter apres la PC
 	 */
 	public void insererApres(Object element) {
-		if(getNbElement() >= 10){
-			viderListe();
-		}
 		Noeud nInserer;
 		
 		if (estVide()) {	// si liste vide, créer le premier element
@@ -166,6 +163,20 @@ public class ListeChainee {
 			}
 		}
 		nbElement--;
+	}
+	
+	public void echangerElements(){
+		Object tmp = null;
+		tmp = positionCourante.element;
+		positionCourante.element = positionCourante.suivant.element;
+		positionCourante.suivant.element = tmp;
+	}
+	
+	public void deplacerFin(){
+		Object tmp = null;
+		tmp = positionCourante.element;
+		supprimerPC();
+		insererApres(tmp);
 	}
 
 	// Avance la position courante à la prochaine de façon circulaire

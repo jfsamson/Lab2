@@ -25,11 +25,38 @@ public abstract class Forme{
 	
 	abstract double getDistance();
 	
+	abstract void setX(int x);
+	
+	abstract void setY(int y);
+	
 	public int getNseq(){
 		return nseq;
 	}
-	public String getNom() {
+	
+	public String getNom(){
 		return nom;
+	}
+	
+	public int getCode() {
+		int code = 0;
+		switch (nom) {
+			case "CAREE":
+				code = 0;
+				break;
+			case "RECTANGLE":
+				code = 1;
+				break;
+			case "CERCLE":
+				code = 2;
+				break;
+			case "OVALE":
+				code = 3;
+				break;
+			case "LIGNE":
+				code = 4;
+				break;
+		}
+		return code;
 	}
 }
 

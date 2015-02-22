@@ -30,16 +30,20 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 
 	private static final long serialVersionUID = -1210804336046370508L;
 	private CreateurFormes createurFormes = null;
-	private FenetreFormes fenetreFormes = new FenetreFormes();
+	private FenetreFormes fenetreFormes;
+	private ListeChainee liste;
 	private CommBase comm;
 	private IDLogger logger = IDLogger.getInstance(); //M�thode statique
+	
 
 	/**
 	 * Constructeur
 	 */
 	public FenetrePrincipale(final CommBase comm){
+		liste = new ListeChainee();
+		fenetreFormes = new FenetreFormes(liste);
 		this.comm = comm;
-		MenuFenetre menu = new MenuFenetre(this.comm);
+		MenuFenetre menu = new MenuFenetre(this.comm, liste, fenetreFormes);
 		this.setLayout(new BorderLayout());
 		this.add(menu, BorderLayout.NORTH); 
 		this.add(fenetreFormes, BorderLayout.CENTER); // Ajoute la fenêtre de forme à la fenètre principale
